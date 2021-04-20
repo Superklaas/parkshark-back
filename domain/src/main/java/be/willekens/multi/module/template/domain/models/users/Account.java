@@ -15,7 +15,7 @@ public class Account {
     @Column(name= "email", unique=true)
     private String email;
     @Column(name="password")
-    private String EncryptedPassword;
+    private String encryptedPassword;
     @Enumerated(value=EnumType.STRING)
     @Column(name="role")
     private Role role;
@@ -23,7 +23,7 @@ public class Account {
     public Account(String email, String encryptedPassword, Role role) {
         assertIsValidEmailOrThrowException(email);
         this.email = email;
-        EncryptedPassword = encryptedPassword;
+        this.encryptedPassword = encryptedPassword;
         this.role = role;
     }
 
@@ -35,7 +35,7 @@ public class Account {
     }
 
     public String getEncryptedPassword() {
-        return EncryptedPassword;
+        return encryptedPassword;
     }
 
     public Role getRole() {

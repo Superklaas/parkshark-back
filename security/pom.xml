@@ -25,10 +25,6 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>service</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>${project.groupId}</groupId>-->
-<!--            <artifactId>api</artifactId>-->
-<!--        </dependency>-->
     </dependencies>
 
 </project>

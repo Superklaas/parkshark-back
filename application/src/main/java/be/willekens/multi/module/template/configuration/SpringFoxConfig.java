@@ -2,6 +2,7 @@ package be.willekens.multi.module.template.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -20,7 +21,7 @@ public class SpringFoxConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
 //                .ignoredParameterTypes(Authentication.class)
-//                .securitySchemes(List.of(new BasicAuth("basicAuth")))
+                .securitySchemes(List.of(new BasicAuth("basicAuth")))
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(PathSelectors.any())
