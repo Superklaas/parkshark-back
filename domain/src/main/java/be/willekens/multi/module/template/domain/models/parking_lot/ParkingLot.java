@@ -64,6 +64,36 @@ public class ParkingLot {
         return pricePerHour;
     }
 
+    public ParkingLot setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public ParkingLot setCategory(Category category) {
+        this.category = category;
+        return this;
+    }
+
+    public ParkingLot setMaxCapacaity(int maxCapacaity) {
+        this.maxCapacaity = maxCapacaity;
+        return this;
+    }
+
+    public ParkingLot setContactPerson(ContactPerson contactPerson) {
+        this.contactPerson = contactPerson;
+        return this;
+    }
+
+    public ParkingLot setAddress(Address address) {
+        this.address = address;
+        return this;
+    }
+
+    public ParkingLot setPricePerHour(Price pricePerHour) {
+        this.pricePerHour = pricePerHour;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

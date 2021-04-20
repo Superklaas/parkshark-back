@@ -30,4 +30,14 @@ public class PostalCode {
     public String getLabel() {
         return label;
     }
+
+    public PostalCode setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+        return this;
+    }
+
+    public PostalCode setLabel(String label) {
+        this.label = label;
+        return this;
+    }
 }

@@ -64,6 +64,31 @@ public class ContactPerson {
         return address;
     }
 
+    public ContactPerson setFullname(String fullname) {
+        this.fullname = fullname;
+        return this;
+    }
+
+    public ContactPerson setMobilePhoneNumber(String mobilePhoneNumber) {
+        this.mobilePhoneNumber = mobilePhoneNumber;
+        return this;
+    }
+
+    public ContactPerson setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+        return this;
+    }
+
+    public ContactPerson setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactPerson setAddress(Address address) {
+        this.address = address;
+        return this;
+    }
+
     private void assertPhoneNumbersAreValid(String mobilePhoneNumber, String telephoneNumber) {
         if ((mobilePhoneNumber == null || mobilePhoneNumber.isBlank()) && (telephoneNumber == null || telephoneNumber.isBlank())) {
             throw new InvalidPhoneNumberException("You must have at least one phone number");
