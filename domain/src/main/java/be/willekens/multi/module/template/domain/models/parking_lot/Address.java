@@ -43,4 +43,18 @@ public class Address {
         return postalCode;
     }
 
+    public Address setStreetName(String streetName) {
+        this.streetName = streetName;
+        return this;
+    }
+
+    public Address setStreetNumber(String streetNumber) {
+        this.streetNumber = streetNumber;
+        return this;
+    }
+
+    public Address setPostalCode(PostalCode postalCode) {
+        this.postalCode = postalCode;
+        return this;
+    }
 }
