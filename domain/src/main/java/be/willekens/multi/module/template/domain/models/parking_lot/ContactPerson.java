@@ -1,20 +1,35 @@
 package be.willekens.multi.module.template.domain.models.parking_lot;
 
+import be.willekens.multi.module.template.infrastructure.exceptions.InvalidPhoneNumberException;
 import be.willekens.multi.module.template.infrastructure.utils.EmailUtils;
+
+import javax.persistence.*;
 
 import static be.willekens.multi.module.template.infrastructure.utils.EmailUtils.*;
 
+@Entity
+@Table(name = "contact_persons")
 public class ContactPerson {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "contact_person_id")
     private int id;
+    @Column(name = "full_name")
     private String fullname;
+    @Column(name = "mobile_phone_number")
     private String mobilePhoneNumber;
+    @Column(name = "telephone_number")
     private String telephoneNumber;
+    @Column(name = "email", unique = true)
     private String email;
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
     private Address address;
 
-    public ContactPerson(String fullname, String mobilePhoneNumber, String telephoneNumber, String email, Address address) {
+    public ContactPerson(String fullname, String mobilePhoneNumber, String telephoneNumber, String email,
+                         Address address) {
         assertIsValidEmailOrThrowException(email);
+        assertPhoneNumbersAreValid(mobilePhoneNumber, telephoneNumber);
         this.fullname = fullname;
         this.mobilePhoneNumber = mobilePhoneNumber;
         this.telephoneNumber = telephoneNumber;
@@ -48,4 +63,11 @@ public class ContactPerson {
     public Address getAddress() {
         return address;
     }
+
+    private void assertPhoneNumbersAreValid(String mobilePhoneNumber, String telephoneNumber) {
+        if ((mobilePhoneNumber == null || mobilePhoneNumber.isBlank()) && (telephoneNumber == null || telephoneNumber.isBlank())) {
+            throw new InvalidPhoneNumberException("You must have at least one phone number");
+        }
+    }
+
 }

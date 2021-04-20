@@ -16,9 +16,9 @@ public class ParkingLot {
     private Category category;
     @Column(name="max_capacity")
     private int maxCapacaity;
-    @ManyToOne()
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
     private ContactPerson contactPerson;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
     private Address address;
     @Embedded
     private Price pricePerHour;

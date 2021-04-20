@@ -10,9 +10,12 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="address_id")
     private int id;
+    @Column(name = "street_name")
     private String streetName;
+    @Column(name = "street_number")
     private String streetNumber;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(nullable = false)
     private PostalCode postalCode;
 
     public Address(String streetName, String streetNumber, PostalCode postalCode) {
