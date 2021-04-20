@@ -1,5 +1,9 @@
 package be.willekens.multi.module.template.domain.models.parking_lot;
 
+import be.willekens.multi.module.template.infrastructure.utils.EmailUtils;
+
+import static be.willekens.multi.module.template.infrastructure.utils.EmailUtils.*;
+
 public class ContactPerson {
 
     private int id;
@@ -10,6 +14,7 @@ public class ContactPerson {
     private Address address;
 
     public ContactPerson(String fullname, String mobilePhoneNumber, String telephoneNumber, String email, Address address) {
+        assertIsValidEmailOrThrowException(email);
         this.fullname = fullname;
         this.mobilePhoneNumber = mobilePhoneNumber;
         this.telephoneNumber = telephoneNumber;

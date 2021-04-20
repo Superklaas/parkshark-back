@@ -1,10 +1,18 @@
 package be.willekens.multi.module.template.domain.models.parking_lot;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="addresses")
 public class Address {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="address_id")
     private int id;
     private String streetName;
     private String streetNumber;
+    @ManyToOne
     private PostalCode postalCode;
 
     public Address(String streetName, String streetNumber, PostalCode postalCode) {

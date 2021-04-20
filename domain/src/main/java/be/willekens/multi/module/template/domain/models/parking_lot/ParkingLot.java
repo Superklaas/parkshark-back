@@ -1,13 +1,26 @@
 package be.willekens.multi.module.template.domain.models.parking_lot;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="parking_lot")
 public class ParkingLot {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "parking_id")
     private int id;
+    @Column(name="parking_lot_name")
     private String name;
+    @Enumerated(value=EnumType.STRING)
     private Category category;
+    @Column(name="max_capacity")
     private int maxCapacaity;
+    @ManyToOne()
     private ContactPerson contactPerson;
+    @OneToOne
     private Address address;
+    @Embedded
     private Price pricePerHour;
 
     public ParkingLot(String name, Category category, int maxCapacaity, ContactPerson contactPerson, Address address, Price pricePerHour) {
