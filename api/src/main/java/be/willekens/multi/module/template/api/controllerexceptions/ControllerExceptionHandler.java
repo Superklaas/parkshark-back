@@ -1,5 +1,6 @@
 package be.willekens.multi.module.template.api.controllerexceptions;
 
+import be.willekens.multi.module.template.infrastructure.exceptions.InvalidCategoryException;
 import be.willekens.multi.module.template.infrastructure.exceptions.InvalidEmailException;
 import be.willekens.multi.module.template.infrastructure.exceptions.InvalidPhoneNumberException;
 import org.slf4j.Logger;
@@ -33,6 +34,11 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         response.sendError(BAD_REQUEST.value(), ex.getMessage());
     }
 
+    @ExceptionHandler(InvalidCategoryException.class)
+    protected void invalidCategoryHandler(InvalidCategoryException ex, HttpServletResponse response) throws IOException {
+        logger.error("Attempt to create a parking lot with an invalid category");
+        response.sendError(BAD_REQUEST.value(), ex.getMessage());
+    }
 
 
 

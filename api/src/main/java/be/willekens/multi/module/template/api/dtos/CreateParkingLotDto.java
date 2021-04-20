@@ -1,6 +1,7 @@
 package be.willekens.multi.module.template.api.dtos;
 
 import be.willekens.multi.module.template.domain.models.parking_lot.Category;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
