@@ -6,6 +6,7 @@ import be.willekens.multi.module.template.api.dtos.ReceiveParkingLotDto;
 import be.willekens.multi.module.template.domain.models.parking_lot.Category;
 import be.willekens.multi.module.template.domain.models.parking_lot.ParkingLot;
 import be.willekens.multi.module.template.domain.models.parking_lot.Price;
+import be.willekens.multi.module.template.infrastructure.exceptions.InvalidCategoryException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,17 +20,17 @@ public class ParkingLotMapper {
         this.addressMapper = addressMapper;
     }
 
-    public ParkingLot createParkingLotDto_to_parkingLot (CreateParkingLotDto createParkingLotDto) {
+    public ParkingLot createParkingLotDto_to_parkingLot(CreateParkingLotDto createParkingLotDto) {
         return new ParkingLot()
                 .setName(createParkingLotDto.getName())
-                .setCategory(Enum.valueOf(Category.class, createParkingLotDto.getCategory()))
+                .setCategory(getValidCategory(createParkingLotDto.getCategory()))
                 .setMaxCapacaity(createParkingLotDto.getMaxCapacity())
                 .setContactPerson(contactPersonMapper.createContactPersonDto_to_contactPerson(createParkingLotDto.getContactPerson()))
                 .setAddress(addressMapper.createAddressDto_to_address(createParkingLotDto.getParkingAddress()))
                 .setPricePerHour(Price.createPriceInEuros(createParkingLotDto.getPricePerHour()));
     }
 
-    public ReceiveParkingLotDto parkingLot_to_receiveParkingLotDto (ParkingLot parkingLot) {
+    public ReceiveParkingLotDto parkingLot_to_receiveParkingLotDto(ParkingLot parkingLot) {
         return new ReceiveParkingLotDto()
                 .setParkingLotId(parkingLot.getId())
                 .setName(parkingLot.getName())
@@ -38,6 +39,14 @@ public class ParkingLotMapper {
                 .setContactPerson(contactPersonMapper.contactPerson_to_receiveContactPerson(parkingLot.getContactPerson()))
                 .setParkingAddress(addressMapper.address_to_receiveAddress(parkingLot.getAddress()))
                 .setPricePerHour(parkingLot.getPricePerHour().getValue());
+    }
+
+    private Category getValidCategory(String category) {
+        try {
+            return Enum.valueOf(Category.class, category.toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            throw new InvalidCategoryException("The category " + category + " does not exist");
+        }
     }
 
 }
