@@ -1,7 +1,5 @@
 package be.willekens.multi.module.template.api.dtos;
 
-import be.willekens.multi.module.template.domain.models.parking_lot.Category;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,4 +16,12 @@ public class CreateParkingLotDto {
     private CreateAddressDto parkingAddress;
     private double pricePerHour;
 
+    public CreateParkingLotDto(String name, String category, int maxCapacity, CreateContactPersonDto contactPerson, CreateAddressDto parkingAddress, double pricePerHour) {
+        this.name = name;
+        this.category = category;
+        this.maxCapacity = maxCapacity;
+        this.contactPerson = contactPerson;
+        this.parkingAddress = parkingAddress;
+        this.pricePerHour = pricePerHour;
+    }
 }
