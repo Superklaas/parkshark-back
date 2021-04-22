@@ -18,7 +18,6 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     Logger logger = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
-
     @ExceptionHandler(InvalidLicenceException.class)
     protected void invalidLicencePlateHandler(InvalidLicenceException ex, HttpServletResponse response) throws IOException {
         logger.error("Invalid licence plate submitted");
@@ -60,6 +59,5 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         logger.error("Attempt to create a parking lot with an invalid category");
         response.sendError(BAD_REQUEST.value(), ex.getMessage());
     }
-
 
 }

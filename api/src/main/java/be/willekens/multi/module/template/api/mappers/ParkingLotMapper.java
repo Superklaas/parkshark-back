@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 @Component
 public class ParkingLotMapper {
 
-    private ContactPersonMapper contactPersonMapper;
-    private AddressMapper addressMapper;
+    private final ContactPersonMapper contactPersonMapper;
+    private final AddressMapper addressMapper;
 
     public ParkingLotMapper(ContactPersonMapper contactPersonMapper, AddressMapper addressMapper) {
         this.contactPersonMapper = contactPersonMapper;
@@ -31,7 +31,8 @@ public class ParkingLotMapper {
                 .setMaxCapacity(createParkingLotDto.getMaxCapacity())
                 .setContactPerson(contactPersonMapper.createContactPersonDto_to_contactPerson(createParkingLotDto.getContactPerson()))
                 .setAddress(addressMapper.createAddressDto_to_address(createParkingLotDto.getParkingAddress()))
-                .setPricePerHour(Price.createPriceInEuros(createParkingLotDto.getPricePerHour()));
+                .setPricePerHour(Price.createPriceInEuros(createParkingLotDto.getPricePerHour()))
+                .setAvailableSpotsLeft(createParkingLotDto.getMaxCapacity());
     }
 
     public ReceiveParkingLotDto parkingLot_to_receiveParkingLotDto(ParkingLot parkingLot) {

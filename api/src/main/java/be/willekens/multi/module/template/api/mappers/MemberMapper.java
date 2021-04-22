@@ -13,7 +13,8 @@ import java.time.LocalDate;
 
 @Component
 public class MemberMapper {
-    private AddressMapper addressMapper;
+
+    private final AddressMapper addressMapper;
 
     @Autowired
     public MemberMapper(AddressMapper addressMapper) {

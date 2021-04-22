@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContactPersonMapper {
 
-    private AddressMapper addressMapper;
+    private final AddressMapper addressMapper;
 
     public ContactPersonMapper(AddressMapper addressMapper) {
         this.addressMapper = addressMapper;

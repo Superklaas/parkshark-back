@@ -8,11 +8,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateParkingSpotDto {
+
     private int memberId;
     private int parkingLotId;
     private String licencePlateNumber;
     private String licencePlateCountry;
-
-
 
 }

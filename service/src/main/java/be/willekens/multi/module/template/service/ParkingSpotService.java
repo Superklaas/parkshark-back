@@ -1,8 +1,10 @@
 package be.willekens.multi.module.template.service;
 
+import be.willekens.multi.module.template.domain.models.parking_lot.ParkingLot;
 import be.willekens.multi.module.template.domain.models.parking_spot.ParkingSpot;
 import be.willekens.multi.module.template.domain.repository.ParkingSpotRepository;
 import be.willekens.multi.module.template.infrastructure.exceptions.InvalidLicenceException;
+import be.willekens.multi.module.template.infrastructure.exceptions.NoParkingSpotLeftException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +23,16 @@ public class ParkingSpotService {
         this.parkingLotService = parkingLotService;
     }
 
-
     public ParkingSpot createParkingSpot(ParkingSpot parkingSpot) {
-        parkingLotService.checkIfIsThereParkingSpotAvailable(parkingSpot.getParkingLotId());
-        if (parkingSpot.getMemberId().getLicencePlate().equals(parkingSpot.getLicencePlate())) {
+        if (!parkingSpot.getMemberId().getLicencePlate().equals(parkingSpot.getLicencePlate())) {
             throw new InvalidLicenceException("Provided licence plate is invalid");
         }
+
+        ParkingLot parkingLot = parkingLotService.findById(parkingSpot.getParkingLotId().getId());
+        if (parkingLot.getAvailableSpotsLeft() == 0) {
+            throw new NoParkingSpotLeftException("There is no parking spot available");
+        }
+        parkingLot.reduce_available_spots_left();
         return parkingSpotRepository.save(parkingSpot);
     }
 

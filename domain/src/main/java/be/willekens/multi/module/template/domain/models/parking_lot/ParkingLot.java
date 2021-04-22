@@ -30,8 +30,8 @@ public class ParkingLot {
     private Address address;
     @Embedded
     private Price pricePerHour;
-    @Transient
-    private int availableSpotLeft;
+    @Column(name = "available_spots_left")
+    private int availableSpotsLeft;
 
     public ParkingLot(String name, Category category, int maxCapacity, ContactPerson contactPerson, Address address, Price pricePerHour) {
         this.name = name;
@@ -40,7 +40,7 @@ public class ParkingLot {
         this.contactPerson = contactPerson;
         this.address = address;
         this.pricePerHour = pricePerHour;
-        this.availableSpotLeft = maxCapacity;
+        this.availableSpotsLeft = maxCapacity;
     }
 
     public ParkingLot() {
@@ -74,8 +74,8 @@ public class ParkingLot {
         return pricePerHour;
     }
 
-    public int getAvailableSpotLeft() {
-        return availableSpotLeft;
+    public int getAvailableSpotsLeft() {
+        return availableSpotsLeft;
     }
 
     public ParkingLot setName(String name) {
@@ -108,17 +108,13 @@ public class ParkingLot {
         return this;
     }
 
-    public ParkingLot setAvailableSpotLeft(int availableSpotLeft) {
-        this.availableSpotLeft = availableSpotLeft;
+    public ParkingLot setAvailableSpotsLeft(int availableSpotLeft) {
+        this.availableSpotsLeft = availableSpotLeft;
         return this;
     }
 
-    public ParkingLot reduce_available_spots_left() {
-        if (this.availableSpotLeft == 0) {
-            throw new NoParkingSpotLeftException("There is no parking spot available");
-        }
-        this.availableSpotLeft -= 1;
-        return this;
+    public void reduce_available_spots_left() {
+        this.availableSpotsLeft -= 1;
     }
 
     @Override
