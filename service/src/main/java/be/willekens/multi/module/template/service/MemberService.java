@@ -1,16 +1,18 @@
 package be.willekens.multi.module.template.service;
 
-import be.willekens.multi.module.template.domain.models.address.Address;
-import be.willekens.multi.module.template.domain.models.address.PostalCode;
-import be.willekens.multi.module.template.domain.models.member.Member;
+import be.willekens.multi.module.template.domain.models.parking_lot.Address;
+import be.willekens.multi.module.template.domain.models.parking_lot.PostalCode;
+import be.willekens.multi.module.template.domain.models.users.Member;
 import be.willekens.multi.module.template.domain.repository.MemberRepository;
 import be.willekens.multi.module.template.infrastructure.exceptions.InvalidEmailException;
+import be.willekens.multi.module.template.infrastructure.exceptions.MemberDoesNotExistException;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -40,4 +42,11 @@ public class MemberService {
         return resultPostalCode;
     }
 
+    public Member findById(int memberId) {
+        Optional<Member> member = memberRepository.findById(memberId);
+        if (member.isEmpty()) {
+            throw new MemberDoesNotExistException("This member does not exist");
+        }
+        return member.get();
+    }
 }

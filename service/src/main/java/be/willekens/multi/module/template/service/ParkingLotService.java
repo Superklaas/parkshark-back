@@ -4,11 +4,13 @@ import be.willekens.multi.module.template.domain.models.address.Address;
 import be.willekens.multi.module.template.domain.models.parking_lot.ParkingLot;
 import be.willekens.multi.module.template.domain.models.address.PostalCode;
 import be.willekens.multi.module.template.domain.repository.ParkingLotRepository;
+import be.willekens.multi.module.template.infrastructure.exceptions.ParkingLotDoesNotExistException;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 
 @Service
@@ -36,5 +38,17 @@ public class ParkingLotService {
             resultPostalCode = postalCodeService.createPostalCode(postalCode);
         }
         return resultPostalCode;
+    }
+    public void checkIfIsThereParkingSpotAvailable(ParkingLot parkingLotId) {
+      Optional<ParkingLot> parkingLot =  parkingLotRepository.findById(parkingLotId.getId());
+      parkingLot.get().reduce_available_spots_left();
+    }
+
+    public ParkingLot findById(int id) {
+        Optional<ParkingLot> parkingLot =  parkingLotRepository.findById(id);
+        if (parkingLot.isEmpty()) {
+            throw new ParkingLotDoesNotExistException("There is no parking lot with id = " + id);
+        }
+        return parkingLot.get();
     }
 }
