@@ -3,7 +3,6 @@ package be.willekens.multi.module.template.api.mappers;
 import be.willekens.multi.module.template.api.dtos.CreateParkingSpotDto;
 import be.willekens.multi.module.template.domain.models.member.LicencePlate;
 import be.willekens.multi.module.template.api.dtos.ReceiveParkingSpotDto;
-import be.willekens.multi.module.template.domain.models.LicencePlate;
 import be.willekens.multi.module.template.domain.models.parking_spot.ParkingSpot;
 import be.willekens.multi.module.template.service.MemberService;
 import be.willekens.multi.module.template.service.ParkingLotService;

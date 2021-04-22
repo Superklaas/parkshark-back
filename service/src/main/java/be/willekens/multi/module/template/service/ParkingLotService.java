@@ -1,6 +1,5 @@
 package be.willekens.multi.module.template.service;
 
-import be.willekens.multi.module.template.domain.models.parking_lot.Address;
 import be.willekens.multi.module.template.domain.models.address.Address;
 import be.willekens.multi.module.template.domain.models.parking_lot.ParkingLot;
 import be.willekens.multi.module.template.domain.models.address.PostalCode;
