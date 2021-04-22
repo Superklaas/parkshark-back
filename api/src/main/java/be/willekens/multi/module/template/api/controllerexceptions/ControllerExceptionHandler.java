@@ -1,8 +1,6 @@
 package be.willekens.multi.module.template.api.controllerexceptions;
 
-import be.willekens.multi.module.template.infrastructure.exceptions.InvalidCategoryException;
-import be.willekens.multi.module.template.infrastructure.exceptions.InvalidEmailException;
-import be.willekens.multi.module.template.infrastructure.exceptions.InvalidPhoneNumberException;
+import be.willekens.multi.module.template.infrastructure.exceptions.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,6 +19,29 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     Logger logger = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
 
+    @ExceptionHandler(InvalidLicenceException.class)
+    protected void invalidLicencePlateHandler(InvalidLicenceException ex, HttpServletResponse response) throws IOException {
+        logger.error("Invalid licence plate submitted");
+        response.sendError(BAD_REQUEST.value(), ex.getMessage());
+    }
+
+    @ExceptionHandler(MemberDoesNotExistException.class)
+    protected void memberDoesNotExistHandler(MemberDoesNotExistException ex, HttpServletResponse response) throws IOException {
+        logger.error("This member does not exist");
+        response.sendError(BAD_REQUEST.value(), ex.getMessage());
+    }
+
+    @ExceptionHandler(NoParkingSpotLeftException.class)
+    protected void noParkingSpotsLeftHandler(NoParkingSpotLeftException ex, HttpServletResponse response) throws IOException {
+        logger.error("No parking spots left");
+        response.sendError(BAD_REQUEST.value(), ex.getMessage());
+    }
+
+    @ExceptionHandler(ParkingLotDoesNotExistException.class)
+    protected void parkingLotDoesNotExistHandler(ParkingLotDoesNotExistException ex, HttpServletResponse response) throws IOException {
+        logger.error("This parking lot does not exist");
+        response.sendError(BAD_REQUEST.value(), ex.getMessage());
+    }
 
     @ExceptionHandler(InvalidEmailException.class)
     protected void invalidEmailHandler(InvalidEmailException ex, HttpServletResponse response) throws IOException {
@@ -39,8 +60,6 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         logger.error("Attempt to create a parking lot with an invalid category");
         response.sendError(BAD_REQUEST.value(), ex.getMessage());
     }
-
-
 
 
 }

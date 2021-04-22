@@ -24,6 +24,7 @@ public class ContactPerson {
     @Column(name = "email")
     private String email;
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "address_id")
     private Address address;
 
     public ContactPerson(String fullname, String mobilePhoneNumber, String telephoneNumber, String email,

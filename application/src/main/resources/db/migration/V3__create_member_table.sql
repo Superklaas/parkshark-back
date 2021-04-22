@@ -5,14 +5,14 @@ create table members(
             primary key,
     first_name varchar(255),
     last_name varchar(255),
-   address_address_id integer
+   address_id integer
        constraint fk_members_to_address
            references addresses,
    phone_number varchar(255),
    plate_number varchar(255),
    issuing_country varchar(255),
    registration_date date,
-   account_account_id integer
+   account_id integer
                     constraint fk_members_to_accounts
                     references accounts
 );

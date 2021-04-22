@@ -20,8 +20,10 @@ public class ParkingLot {
     @Column(name="max_capacity")
     private int maxCapacity;
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "contact_person_id")
     private ContactPerson contactPerson;
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "address_id")
     private Address address;
     @Embedded
     private Price pricePerHour;

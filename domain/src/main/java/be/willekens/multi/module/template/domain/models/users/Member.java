@@ -23,6 +23,7 @@ public class Member {
     @Column(name = "last_name")
     private String lastName;
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "address_id")
     private Address address;
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -32,6 +33,7 @@ public class Member {
     @Column(name = "registration_date",columnDefinition = "DATE")
     private LocalDate registrationDate;
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "account_id")
     private Account account;
 
     public Member setAccount(Account account) {

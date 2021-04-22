@@ -20,7 +20,7 @@ class ParkingLotServiceSpringTest {
         ParkingLot parkingLot = new ParkingLot()
                 .setName("test")
                 .setCategory(Category.UNDERGROUND_BUILDING)
-                .setMaxCapacaity(100)
+                .setMaxCapacity(100)
                 .setPricePerHour(Price.createPriceInEuros(3))
                 .setAddress(new Address()
                         .setStreetName("Test street")

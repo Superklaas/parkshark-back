@@ -32,7 +32,7 @@ create table addresses
             primary key,
     street_name varchar(255),
     street_number varchar(255),
-    postal_code_postal_id integer not null
+    postal_id integer not null
         constraint fk4w4cpvp4hh9dshtn6w2auyuv
             references postal_codes
 );
@@ -50,7 +50,7 @@ create table contact_persons
     full_name varchar(255),
     mobile_phone_number varchar(255),
     telephone_number varchar(255),
-    address_address_id integer
+    address_id integer
         constraint fkmjh1g4jvkgf6xtqlrwyhn52rv
             references addresses
 );
@@ -67,10 +67,10 @@ create table parking_lot
     parking_lot_name varchar(255),
     currency integer,
     value double precision,
-    address_address_id integer
+    address_id integer
         constraint fkn4wtrjuurhn0s1tg7olkpct9x
             references addresses,
-    contact_person_contact_person_id integer
+    contact_person_id integer
         constraint fkifasg5wl68gyu8etfkeijkegs
             references contact_persons
 );

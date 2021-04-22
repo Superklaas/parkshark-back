@@ -21,7 +21,7 @@ public class ParkingSpot {
     private Member memberId;
 
     @ManyToOne
-    @JoinColumn(name="parking_id")
+    @JoinColumn(name="parking_lot_id")
     private ParkingLot parkingLotId;
 
     @Embedded

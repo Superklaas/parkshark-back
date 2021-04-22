@@ -1,6 +1,7 @@
 package be.willekens.multi.module.template.api.mappers;
 
 import be.willekens.multi.module.template.api.dtos.CreateParkingSpotDto;
+import be.willekens.multi.module.template.api.dtos.ReceiveParkingSpotDto;
 import be.willekens.multi.module.template.domain.models.LicencePlate;
 import be.willekens.multi.module.template.domain.models.parking_spot.ParkingSpot;
 import be.willekens.multi.module.template.service.MemberService;
@@ -30,9 +31,14 @@ public class ParkingSpotMapper {
     }
 
 
-
-
-
+    public ReceiveParkingSpotDto parkingSpot_to_ReceiveParkingSpotDto(ParkingSpot parkingSpot) {
+        return new ReceiveParkingSpotDto()
+                .setId(parkingSpot.getId())
+                .setParkingLotId(parkingSpot.getParkingLotId().getId())
+                .setMemberId(parkingSpot.getMemberId().getId())
+                .setLicencePlateNumber(parkingSpot.getLicencePlate().getPlateNumber())
+                .setLicencePlateCountry(parkingSpot.getLicencePlate().getIssuingCountry());
+    }
 
 
 }

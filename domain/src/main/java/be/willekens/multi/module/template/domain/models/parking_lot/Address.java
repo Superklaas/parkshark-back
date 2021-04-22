@@ -15,7 +15,7 @@ public class Address {
     @Column(name = "street_number")
     private String streetNumber;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "postal_id",nullable = false)
     private PostalCode postalCode;
 
     public Address(String streetName, String streetNumber, PostalCode postalCode) {
