@@ -24,7 +24,7 @@ public class ParkingLotMapper {
         return new ParkingLot()
                 .setName(createParkingLotDto.getName())
                 .setCategory(getValidCategory(createParkingLotDto.getCategory()))
-                .setMaxCapacaity(createParkingLotDto.getMaxCapacity())
+                .setMaxCapacity(createParkingLotDto.getMaxCapacity())
                 .setContactPerson(contactPersonMapper.createContactPersonDto_to_contactPerson(createParkingLotDto.getContactPerson()))
                 .setAddress(addressMapper.createAddressDto_to_address(createParkingLotDto.getParkingAddress()))
                 .setPricePerHour(Price.createPriceInEuros(createParkingLotDto.getPricePerHour()));
@@ -35,7 +35,7 @@ public class ParkingLotMapper {
                 .setParkingLotId(parkingLot.getId())
                 .setName(parkingLot.getName())
                 .setCategory(parkingLot.getCategory().name())
-                .setMaxCapacity(parkingLot.getMaxCapacaity())
+                .setMaxCapacity(parkingLot.getMaxCapacity())
                 .setContactPerson(contactPersonMapper.contactPerson_to_receiveContactPerson(parkingLot.getContactPerson()))
                 .setParkingAddress(addressMapper.address_to_receiveAddress(parkingLot.getAddress()))
                 .setPricePerHour(parkingLot.getPricePerHour().getValue());
