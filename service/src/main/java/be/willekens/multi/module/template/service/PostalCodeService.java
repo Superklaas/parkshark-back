@@ -20,4 +20,8 @@ public class PostalCodeService {
     public PostalCode getByPostalCode(String postalCode){
         return postalCodeRepository.findByPostalCode(postalCode);
     }
+
+    public PostalCode createPostalCode(PostalCode postalCode){
+        return postalCodeRepository.save(postalCode);
+    }
 }

@@ -21,7 +21,7 @@ public class ContactPerson {
     private String mobilePhoneNumber;
     @Column(name = "telephone_number")
     private String telephoneNumber;
-    @Column(name = "email", unique = true)
+    @Column(name = "email")
     private String email;
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
     private Address address;
