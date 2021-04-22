@@ -22,7 +22,6 @@ public class MemberService {
     public Member createMember(Member member) {
         Address address = member.getAddress();
         address.setPostalCode(getPostalCodeByPostalCodeOrCreateNewOne(address.getPostalCode()));
-        member.setAddress(address);
        return memberRepository.save(member);
     }
 

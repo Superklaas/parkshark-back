@@ -25,12 +25,8 @@ public class ParkingLotService {
     public ParkingLot createParkingLot(ParkingLot parkingLot) {
         Address parkingLotAddress = parkingLot.getAddress();
         parkingLotAddress.setPostalCode(getPostalCodeByPostalCodeOrCreateNewOne(parkingLotAddress.getPostalCode()));
-        parkingLot.setAddress(parkingLotAddress);
-        ContactPerson contactPerson = parkingLot.getContactPerson();
-        Address contactAddress = contactPerson.getAddress();
+        Address contactAddress = parkingLot.getContactPerson().getAddress();
         contactAddress.setPostalCode(getPostalCodeByPostalCodeOrCreateNewOne(contactAddress.getPostalCode()));
-        contactPerson.setAddress(contactAddress);
-        parkingLot.setContactPerson(contactPerson);
        return parkingLotRepository.save(parkingLot);
     }
 
