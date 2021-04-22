@@ -3,7 +3,7 @@ package be.willekens.multi.module.template.api.controllers;
 import be.willekens.multi.module.template.api.dtos.CreateMemberDto;
 import be.willekens.multi.module.template.api.dtos.ReceiveMemberDto;
 import be.willekens.multi.module.template.api.mappers.MemberMapper;
-import be.willekens.multi.module.template.domain.models.users.Member;
+import be.willekens.multi.module.template.domain.models.member.Member;
 import be.willekens.multi.module.template.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,7 @@ public class MemberController {
     public ReceiveMemberDto createMember(@RequestBody CreateMemberDto createMemberDto) {
         logger.info("Attempt to create a member");
          Member member = memberService.createMember(memberMapper.createMemberDto_to_Member(createMemberDto));
-         return memberMapper.member_to_ReceiveMemberDto(member);
+         return memberMapper.member_to_receiveMemberDto(member);
     }
 
 

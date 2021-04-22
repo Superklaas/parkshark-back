@@ -1,9 +1,10 @@
 package be.willekens.multi.module.template.service;
 
+import be.willekens.multi.module.template.domain.models.address.Address;
+import be.willekens.multi.module.template.domain.models.address.PostalCode;
 import be.willekens.multi.module.template.domain.models.parking_lot.*;
+import be.willekens.multi.module.template.domain.models.price.Price;
 import be.willekens.multi.module.template.domain.repository.ParkingLotRepository;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,7 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)

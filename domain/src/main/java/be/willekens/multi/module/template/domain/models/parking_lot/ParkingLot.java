@@ -1,5 +1,8 @@
 package be.willekens.multi.module.template.domain.models.parking_lot;
 
+import be.willekens.multi.module.template.domain.models.address.Address;
+import be.willekens.multi.module.template.domain.models.price.Price;
+
 import be.willekens.multi.module.template.infrastructure.exceptions.NoParkingSpotLeftException;
 
 import javax.persistence.*;

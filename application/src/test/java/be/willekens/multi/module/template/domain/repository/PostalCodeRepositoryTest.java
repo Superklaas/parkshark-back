@@ -1,13 +1,11 @@
 package be.willekens.multi.module.template.domain.repository;
 
-import be.willekens.multi.module.template.domain.models.parking_lot.PostalCode;
-import org.assertj.core.api.Assertions;
+import be.willekens.multi.module.template.domain.models.address.PostalCode;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class PostalCodeRepositoryTest {

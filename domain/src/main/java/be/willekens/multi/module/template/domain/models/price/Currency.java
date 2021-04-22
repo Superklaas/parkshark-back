@@ -1,4 +1,4 @@
-package be.willekens.multi.module.template.domain.models.parking_lot;
+package be.willekens.multi.module.template.domain.models.price;
 
 public enum Currency {
 

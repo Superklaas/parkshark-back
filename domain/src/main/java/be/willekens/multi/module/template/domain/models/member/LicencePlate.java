@@ -1,4 +1,4 @@
-package be.willekens.multi.module.template.domain.models;
+package be.willekens.multi.module.template.domain.models.member;
 
 
 import lombok.Getter;

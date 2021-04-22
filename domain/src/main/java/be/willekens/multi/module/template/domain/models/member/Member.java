@@ -1,8 +1,8 @@
-package be.willekens.multi.module.template.domain.models.users;
+package be.willekens.multi.module.template.domain.models.member;
 
 
-import be.willekens.multi.module.template.domain.models.LicencePlate;
-import be.willekens.multi.module.template.domain.models.parking_lot.Address;
+import be.willekens.multi.module.template.domain.models.address.Address;
+import be.willekens.multi.module.template.domain.models.account.Account;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
