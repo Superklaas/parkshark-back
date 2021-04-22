@@ -20,7 +20,8 @@ class ParkingLotServiceTest {
 
     @Mock
     private ParkingLotRepository parkingLotRepository;
-
+    @Mock
+    private PostalCodeService postalCodeService;
     @InjectMocks
     private ParkingLotService parkingLotService;
 
@@ -33,6 +34,7 @@ class ParkingLotServiceTest {
     void createNewParkingLot_thenReturnsParkingLot() {
         ParkingLot parkingLot = new ParkingLot("Andre", Category.ABOVE_GROUND_BUILDING, 10, contactPerson, address, Price.createPriceInEuros(3));
         when(parkingLotRepository.save(parkingLot)).thenReturn(parkingLot);
+        when(postalCodeService.getByPostalCode(address.getPostalCode().getPostalCode())).thenReturn(address.getPostalCode());
 
         assertThat(parkingLotService.createParkingLot(parkingLot)).isEqualTo(parkingLot);
         verify(parkingLotRepository).save(parkingLot);
