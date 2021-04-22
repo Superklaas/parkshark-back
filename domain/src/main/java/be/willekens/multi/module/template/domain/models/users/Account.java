@@ -30,6 +30,10 @@ public class Account {
     public Account() {
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getEmail() {
         return email;
     }
