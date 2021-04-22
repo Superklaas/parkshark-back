@@ -1,6 +1,6 @@
 package be.willekens.multi.module.template.service;
 
-import be.willekens.multi.module.template.domain.models.parking_lot.PostalCode;
+import be.willekens.multi.module.template.domain.models.address.PostalCode;
 import be.willekens.multi.module.template.domain.repository.PostalCodeRepository;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

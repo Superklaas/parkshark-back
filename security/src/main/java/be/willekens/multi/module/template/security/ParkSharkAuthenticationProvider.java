@@ -1,7 +1,7 @@
 package be.willekens.multi.module.template.security;
 
-import be.willekens.multi.module.template.domain.models.users.Account;
-import be.willekens.multi.module.template.domain.models.users.Feature;
+import be.willekens.multi.module.template.domain.models.account.Account;
+import be.willekens.multi.module.template.domain.models.account.Feature;
 import be.willekens.multi.module.template.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;

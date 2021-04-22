@@ -1,13 +1,13 @@
 package be.willekens.multi.module.template.service;
 
+import be.willekens.multi.module.template.domain.models.address.Address;
+import be.willekens.multi.module.template.domain.models.address.PostalCode;
 import be.willekens.multi.module.template.domain.models.parking_lot.*;
+import be.willekens.multi.module.template.domain.models.price.Price;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ParkingLotServiceSpringTest {
@@ -20,7 +20,7 @@ class ParkingLotServiceSpringTest {
         ParkingLot parkingLot = new ParkingLot()
                 .setName("test")
                 .setCategory(Category.UNDERGROUND_BUILDING)
-                .setMaxCapacaity(100)
+                .setMaxCapacity(100)
                 .setPricePerHour(Price.createPriceInEuros(3))
                 .setAddress(new Address()
                         .setStreetName("Test street")

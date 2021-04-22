@@ -2,10 +2,10 @@ package be.willekens.multi.module.template.api.mappers;
 
 import be.willekens.multi.module.template.api.dtos.CreateMemberDto;
 import be.willekens.multi.module.template.api.dtos.ReceiveMemberDto;
-import be.willekens.multi.module.template.domain.models.LicencePlate;
-import be.willekens.multi.module.template.domain.models.users.Account;
-import be.willekens.multi.module.template.domain.models.users.Member;
-import be.willekens.multi.module.template.domain.models.users.Role;
+import be.willekens.multi.module.template.domain.models.member.LicencePlate;
+import be.willekens.multi.module.template.domain.models.account.Account;
+import be.willekens.multi.module.template.domain.models.member.Member;
+import be.willekens.multi.module.template.domain.models.account.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

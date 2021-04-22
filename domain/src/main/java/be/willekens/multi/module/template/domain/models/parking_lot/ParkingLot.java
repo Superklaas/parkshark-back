@@ -1,5 +1,10 @@
 package be.willekens.multi.module.template.domain.models.parking_lot;
 
+import be.willekens.multi.module.template.domain.models.address.Address;
+import be.willekens.multi.module.template.domain.models.price.Price;
+
+import be.willekens.multi.module.template.infrastructure.exceptions.NoParkingSpotLeftException;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -16,21 +21,24 @@ public class ParkingLot {
     @Enumerated(value=EnumType.STRING)
     private Category category;
     @Column(name="max_capacity")
-    private int maxCapacaity;
+    private int maxCapacity;
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
     private ContactPerson contactPerson;
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
     private Address address;
     @Embedded
     private Price pricePerHour;
+    @Transient
+    private int availableSpotLeft;
 
-    public ParkingLot(String name, Category category, int maxCapacaity, ContactPerson contactPerson, Address address, Price pricePerHour) {
+    public ParkingLot(String name, Category category, int maxCapacity, ContactPerson contactPerson, Address address, Price pricePerHour) {
         this.name = name;
         this.category = category;
-        this.maxCapacaity = maxCapacaity;
+        this.maxCapacity = maxCapacity;
         this.contactPerson = contactPerson;
         this.address = address;
         this.pricePerHour = pricePerHour;
+        this.availableSpotLeft = maxCapacity;
     }
 
     public ParkingLot() {
@@ -48,8 +56,8 @@ public class ParkingLot {
         return category;
     }
 
-    public int getMaxCapacaity() {
-        return maxCapacaity;
+    public int getMaxCapacity() {
+        return maxCapacity;
     }
 
     public ContactPerson getContactPerson() {
@@ -64,6 +72,10 @@ public class ParkingLot {
         return pricePerHour;
     }
 
+    public int getAvailableSpotLeft() {
+        return availableSpotLeft;
+    }
+
     public ParkingLot setName(String name) {
         this.name = name;
         return this;
@@ -74,8 +86,8 @@ public class ParkingLot {
         return this;
     }
 
-    public ParkingLot setMaxCapacaity(int maxCapacaity) {
-        this.maxCapacaity = maxCapacaity;
+    public ParkingLot setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
         return this;
     }
 
@@ -94,16 +106,29 @@ public class ParkingLot {
         return this;
     }
 
+    public ParkingLot setAvailableSpotLeft(int availableSpotLeft) {
+        this.availableSpotLeft = availableSpotLeft;
+        return this;
+    }
+
+    public ParkingLot reduce_available_spots_left() {
+        if (this.availableSpotLeft == 0) {
+            throw new NoParkingSpotLeftException("There is no parking spot available");
+        }
+        this.availableSpotLeft -= 1;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ParkingLot that = (ParkingLot) o;
-        return id == that.id && maxCapacaity == that.maxCapacaity && Objects.equals(name, that.name) && category == that.category && Objects.equals(address, that.address);
+        return id == that.id && maxCapacity == that.maxCapacity && Objects.equals(name, that.name) && category == that.category && Objects.equals(address, that.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, category, maxCapacaity, address);
+        return Objects.hash(id, name, category, maxCapacity, address);
     }
 }

@@ -7,20 +7,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CreateMemberDto {
-    private String firstName;
-    private String lastName;
-    private CreateAddressDto address;
-    private String phoneNumber;
-    private String email;
+public class CreateParkingSpotDto {
+    private int memberId;
+    private int parkingLotId;
     private String licencePlateNumber;
     private String licencePlateCountry;
-    private String password;
-
-
-
-
-
 
 
 

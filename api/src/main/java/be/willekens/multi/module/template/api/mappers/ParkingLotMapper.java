@@ -1,11 +1,10 @@
 package be.willekens.multi.module.template.api.mappers;
 
 import be.willekens.multi.module.template.api.dtos.CreateParkingLotDto;
-import be.willekens.multi.module.template.api.dtos.ReceiveContactPersonDto;
 import be.willekens.multi.module.template.api.dtos.ReceiveParkingLotDto;
 import be.willekens.multi.module.template.domain.models.parking_lot.Category;
 import be.willekens.multi.module.template.domain.models.parking_lot.ParkingLot;
-import be.willekens.multi.module.template.domain.models.parking_lot.Price;
+import be.willekens.multi.module.template.domain.models.price.Price;
 import be.willekens.multi.module.template.infrastructure.exceptions.InvalidCategoryException;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +23,7 @@ public class ParkingLotMapper {
         return new ParkingLot()
                 .setName(createParkingLotDto.getName())
                 .setCategory(getValidCategory(createParkingLotDto.getCategory()))
-                .setMaxCapacaity(createParkingLotDto.getMaxCapacity())
+                .setMaxCapacity(createParkingLotDto.getMaxCapacity())
                 .setContactPerson(contactPersonMapper.createContactPersonDto_to_contactPerson(createParkingLotDto.getContactPerson()))
                 .setAddress(addressMapper.createAddressDto_to_address(createParkingLotDto.getParkingAddress()))
                 .setPricePerHour(Price.createPriceInEuros(createParkingLotDto.getPricePerHour()));
@@ -35,7 +34,7 @@ public class ParkingLotMapper {
                 .setParkingLotId(parkingLot.getId())
                 .setName(parkingLot.getName())
                 .setCategory(parkingLot.getCategory().name())
-                .setMaxCapacity(parkingLot.getMaxCapacaity())
+                .setMaxCapacity(parkingLot.getMaxCapacity())
                 .setContactPerson(contactPersonMapper.contactPerson_to_receiveContactPerson(parkingLot.getContactPerson()))
                 .setParkingAddress(addressMapper.address_to_receiveAddress(parkingLot.getAddress()))
                 .setPricePerHour(parkingLot.getPricePerHour().getValue());

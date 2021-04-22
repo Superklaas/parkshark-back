@@ -1,6 +1,6 @@
 package be.willekens.multi.module.template.service;
 
-import be.willekens.multi.module.template.domain.models.users.Account;
+import be.willekens.multi.module.template.domain.models.account.Account;
 import be.willekens.multi.module.template.domain.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 

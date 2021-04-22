@@ -1,4 +1,4 @@
-package be.willekens.multi.module.template.domain.models.users;
+package be.willekens.multi.module.template.domain.models.account;
 
 import org.assertj.core.util.Lists;
 
