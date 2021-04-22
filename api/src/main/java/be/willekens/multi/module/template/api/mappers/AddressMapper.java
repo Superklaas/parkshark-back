@@ -20,7 +20,7 @@ public class AddressMapper {
         return new Address()
                 .setStreetName(createAddressDto.getStreetName())
                 .setStreetNumber(createAddressDto.getStreetNumber())
-                .setPostalCode(getPostalCodeByPostalCodeOrCreateNewOne(createAddressDto.getPostalCode(),
+                .setPostalCode(new PostalCode(createAddressDto.getPostalCode(),
                         createAddressDto.getCity()));
     }
 
@@ -33,11 +33,5 @@ public class AddressMapper {
                 .setCity(address.getPostalCode().getLabel());
     }
 
-    public PostalCode getPostalCodeByPostalCodeOrCreateNewOne(String postalCode, String city) {
-        PostalCode resultPostalCode = postalCodeService.getByPostalCode(postalCode);
-        if (resultPostalCode == null) {
-            resultPostalCode = new PostalCode(postalCode, city);
-        }
-        return resultPostalCode;
-    }
+
 }
