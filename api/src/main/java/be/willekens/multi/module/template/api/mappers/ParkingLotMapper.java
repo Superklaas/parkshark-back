@@ -1,12 +1,17 @@
 package be.willekens.multi.module.template.api.mappers;
 
 import be.willekens.multi.module.template.api.dtos.CreateParkingLotDto;
+import be.willekens.multi.module.template.api.dtos.ReceiveAllParkingLotsDto;
 import be.willekens.multi.module.template.api.dtos.ReceiveParkingLotDto;
 import be.willekens.multi.module.template.domain.models.parking_lot.Category;
+import be.willekens.multi.module.template.domain.models.parking_lot.ContactPerson;
 import be.willekens.multi.module.template.domain.models.parking_lot.ParkingLot;
 import be.willekens.multi.module.template.domain.models.price.Price;
 import be.willekens.multi.module.template.infrastructure.exceptions.InvalidCategoryException;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ParkingLotMapper {
@@ -47,5 +52,28 @@ public class ParkingLotMapper {
             throw new InvalidCategoryException("The category " + category + " does not exist");
         }
     }
+
+    public List<ReceiveAllParkingLotsDto> parkingLot_to_receiveAllParkingLotsDto(List<ParkingLot> parkingLots) {
+        return parkingLots.stream()
+                .map(this::parkingLot_to_receiveAllParkingLotsDto)
+                .collect(Collectors.toList());
+    }
+
+    private ReceiveAllParkingLotsDto parkingLot_to_receiveAllParkingLotsDto(ParkingLot parkingLot) {
+        return new ReceiveAllParkingLotsDto()
+                .setParkingLotId(parkingLot.getId())
+                .setName(parkingLot.getName())
+                .setMaxCapacity(parkingLot.getMaxCapacity())
+                .setTelephoneNumberContactPerson(getTelephoneNumberContactPerson(parkingLot.getContactPerson()))
+                .setEmailContactPerson(parkingLot.getContactPerson().getEmail());
+    }
+
+    private String getTelephoneNumberContactPerson(ContactPerson contactPerson) {
+        if (contactPerson.getTelephoneNumber() == null || contactPerson.getTelephoneNumber().isBlank()) {
+            return contactPerson.getMobilePhoneNumber();
+        }
+        return contactPerson.getTelephoneNumber();
+    }
+
 
 }

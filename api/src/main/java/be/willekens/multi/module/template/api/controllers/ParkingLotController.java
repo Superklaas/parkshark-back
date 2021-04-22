@@ -1,6 +1,7 @@
 package be.willekens.multi.module.template.api.controllers;
 
 import be.willekens.multi.module.template.api.dtos.CreateParkingLotDto;
+import be.willekens.multi.module.template.api.dtos.ReceiveAllParkingLotsDto;
 import be.willekens.multi.module.template.api.dtos.ReceiveParkingLotDto;
 import be.willekens.multi.module.template.api.mappers.ParkingLotMapper;
 import be.willekens.multi.module.template.domain.models.parking_lot.ParkingLot;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = ParkingLotController.PARKING_LOT_RESOURCE_PATH)
@@ -36,5 +39,15 @@ public class ParkingLotController {
         ParkingLot parkingLot = parkingLotService.createParkingLot(parkingLotMapper.createParkingLotDto_to_parkingLot(createParkingLotDto));
         return parkingLotMapper.parkingLot_to_receiveParkingLotDto(parkingLot);
     }
+
+    @PreAuthorize("hasAuthority('GET_ALL_PARKING_LOTS')")
+    @GetMapping(produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ReceiveAllParkingLotsDto> getAllParkingLots() {
+        List<ParkingLot> parkingLots = parkingLotService.getAllParkingLots();
+        return parkingLotMapper.parkingLot_to_receiveAllParkingLotsDto(parkingLots);
+    }
+
+
 
 }
