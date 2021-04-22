@@ -31,7 +31,7 @@ public class MemberMapper {
                 .setAccount(new Account(createMemberDto.getEmail(), createMemberDto.getPassword(), Role.MEMBER));
     }
 
-    public ReceiveMemberDto member_to_ReceiveMemberDto(Member member) {
+    public ReceiveMemberDto member_to_receiveMemberDto(Member member) {
         return new ReceiveMemberDto()
                 .setId(member.getId())
                 .setFirstName(member.getFirstName())

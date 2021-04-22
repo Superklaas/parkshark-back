@@ -31,7 +31,7 @@ public class MemberController {
     public ReceiveMemberDto createMember(@RequestBody CreateMemberDto createMemberDto) {
         logger.info("Attempt to create a member");
          Member member = memberService.createMember(memberMapper.createMemberDto_to_Member(createMemberDto));
-         return memberMapper.member_to_ReceiveMemberDto(member);
+         return memberMapper.member_to_receiveMemberDto(member);
     }
 
 
