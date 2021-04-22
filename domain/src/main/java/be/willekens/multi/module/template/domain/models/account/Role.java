@@ -6,7 +6,7 @@ import java.util.List;
 
 public enum Role {
 
-    MANAGER(Feature.CREATE_PARKING_LOT, Feature.CREATE_DIVISION),
+    MANAGER(Feature.CREATE_PARKING_LOT, Feature.CREATE_DIVISION, Feature.VIEW_ALL_DIVISIONS),
     MEMBER(Feature.ALLOCATE_PARKING_SPOT);
 
     private final List<Feature> featureList;

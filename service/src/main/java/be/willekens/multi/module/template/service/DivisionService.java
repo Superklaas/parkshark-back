@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -18,6 +19,10 @@ public class DivisionService {
 
     public Division createDivision(Division division) {
         return divisionRepository.save(division);
+    }
+
+    public List<Division> getAllDivisions(){
+        return divisionRepository.findAll();
     }
 
 }

@@ -12,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping(path = DivisionController.DIVISION_RESOURCE_PATH)
 public class DivisionController {
@@ -36,6 +39,14 @@ public class DivisionController {
         Division division =
                 divisionService.createDivision(divisionMapper.createDivisionDto_to_Division(createDivisionDto));
         return divisionMapper.division_to_receiveDivisionDto(division);
+    }
+
+    @PreAuthorize("hasAuthority('VIEW_ALL_DIVISIONS')")
+    @GetMapping(produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ReceiveDivisionDto> getall(){
+        return divisionService.getAllDivisions().stream().map(division ->
+        divisionMapper.division_to_receiveDivisionDto(division)).collect(Collectors.toList());
     }
 
 
