@@ -1,9 +1,8 @@
 package be.willekens.multi.module.template.domain.models.parking_spot;
 
-import be.willekens.multi.module.template.domain.models.LicencePlate;
+import be.willekens.multi.module.template.domain.models.member.LicencePlate;
+import be.willekens.multi.module.template.domain.models.member.Member;
 import be.willekens.multi.module.template.domain.models.parking_lot.ParkingLot;
-import be.willekens.multi.module.template.domain.models.users.Member;
-import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDate;

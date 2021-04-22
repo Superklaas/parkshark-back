@@ -1,8 +1,9 @@
 package be.willekens.multi.module.template.service;
 
-import be.willekens.multi.module.template.domain.models.parking_lot.Address;
-import be.willekens.multi.module.template.domain.models.parking_lot.PostalCode;
-import be.willekens.multi.module.template.domain.models.users.Member;
+
+import be.willekens.multi.module.template.domain.models.address.Address;
+import be.willekens.multi.module.template.domain.models.address.PostalCode;
+import be.willekens.multi.module.template.domain.models.member.Member;
 import be.willekens.multi.module.template.domain.repository.MemberRepository;
 import be.willekens.multi.module.template.infrastructure.exceptions.InvalidEmailException;
 import be.willekens.multi.module.template.infrastructure.exceptions.MemberDoesNotExistException;
