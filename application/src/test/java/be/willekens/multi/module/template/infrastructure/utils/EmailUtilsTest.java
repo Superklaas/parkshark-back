@@ -18,7 +18,7 @@ class EmailUtilsTest {
         //Given
 
         //When & Then
-        emailUtils.assertIsValidEmailOrThrowException(input);
+        EmailUtils.assertIsValidEmailOrThrowException(input);
     }
 
     @ParameterizedTest
@@ -29,7 +29,7 @@ class EmailUtilsTest {
 
         //When & Then
 
-        assertThrows(InvalidEmailException.class, () -> emailUtils.assertIsValidEmailOrThrowException(input));
+        assertThrows(InvalidEmailException.class, () -> EmailUtils.assertIsValidEmailOrThrowException(input));
     }
 
     @Test

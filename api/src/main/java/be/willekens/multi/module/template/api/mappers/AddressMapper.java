@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddressMapper {
 
-    private PostalCodeService postalCodeService;
+    private final PostalCodeService postalCodeService;
 
     public AddressMapper(PostalCodeService postalCodeService) {
         this.postalCodeService = postalCodeService;

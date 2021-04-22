@@ -25,10 +25,8 @@ class ParkingLotServiceTest {
     @InjectMocks
     private ParkingLotService parkingLotService;
 
-
     Address address = new Address("Sussame Street", "32", new PostalCode("3300", "Tienen"));
     ContactPerson contactPerson = new ContactPerson("Ihsan", "04555555", "", "rafael@excalibur.com", address);
-
 
     @Test
     void createNewParkingLot_thenReturnsParkingLot() {
@@ -39,6 +37,5 @@ class ParkingLotServiceTest {
         assertThat(parkingLotService.createParkingLot(parkingLot)).isEqualTo(parkingLot);
         verify(parkingLotRepository).save(parkingLot);
     }
-
 
 }

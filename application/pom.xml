@@ -20,10 +20,20 @@
             <artifactId>api</artifactId>
         </dependency>
 
+<!--        <dependency>-->
+<!--&lt;!&ndash;            <groupId>io.springfox</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <artifactId>springfox-boot-starter</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <version>3.0.0</version>&ndash;&gt;-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <version>3.0.0</version>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.5.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-security</artifactId>
+            <version>1.5.7</version>
         </dependency>
     </dependencies>
 
