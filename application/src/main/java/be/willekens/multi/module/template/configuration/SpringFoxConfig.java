@@ -19,9 +19,31 @@ package be.willekens.multi.module.template.configuration;
 //import java.util.Arrays;
 //import java.util.List;
 
-//@Configuration
-//@EnableSwagger2
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+//@SecurityScheme(
+//        name = "api",
+//        scheme = "basic",
+//        type = SecuritySchemeType.HTTP,
+//        in = SecuritySchemeIn.HEADER)
 public class SpringFoxConfig {
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .components(new Components()
+                        .addSecuritySchemes("bearer-key",
+                                new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")));
+    }
+
 
 //    @Bean
 //    public Docket api() {

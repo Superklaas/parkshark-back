@@ -14,8 +14,8 @@ import javax.transaction.Transactional;
 @Transactional
 public class ParkingSpotService {
 
-    private ParkingSpotRepository parkingSpotRepository;
-    private ParkingLotService parkingLotService;
+    private final ParkingSpotRepository parkingSpotRepository;
+    private final ParkingLotService parkingLotService;
 
     @Autowired
     public ParkingSpotService(ParkingSpotRepository parkingSpotRepository, ParkingLotService parkingLotService) {
