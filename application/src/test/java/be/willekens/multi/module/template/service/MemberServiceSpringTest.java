@@ -1,26 +1,21 @@
 package be.willekens.multi.module.template.service;
 
-import be.willekens.multi.module.template.domain.models.LicencePlate;
-import be.willekens.multi.module.template.domain.models.parking_lot.Address;
-import be.willekens.multi.module.template.domain.models.parking_lot.PostalCode;
-import be.willekens.multi.module.template.domain.models.users.Account;
-import be.willekens.multi.module.template.domain.models.users.Member;
-import be.willekens.multi.module.template.domain.models.users.Role;
+import be.willekens.multi.module.template.domain.models.member.LicencePlate;
+import be.willekens.multi.module.template.domain.models.address.Address;
+import be.willekens.multi.module.template.domain.models.address.PostalCode;
+import be.willekens.multi.module.template.domain.models.account.Account;
+import be.willekens.multi.module.template.domain.models.member.Member;
+import be.willekens.multi.module.template.domain.models.account.Role;
 import be.willekens.multi.module.template.infrastructure.exceptions.InvalidEmailException;
-import org.assertj.core.api.Assertions;
-import be.willekens.multi.module.template.domain.models.users.Role;
-import org.hibernate.exception.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)

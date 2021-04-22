@@ -3,13 +3,7 @@ package be.willekens.multi.module.template.api.mappers;
 import be.willekens.multi.module.template.api.dtos.CreateAddressDto;
 import be.willekens.multi.module.template.api.dtos.CreateContactPersonDto;
 import be.willekens.multi.module.template.api.dtos.CreateParkingLotDto;
-import be.willekens.multi.module.template.domain.models.parking_lot.Category;
-import be.willekens.multi.module.template.domain.models.parking_lot.ParkingLot;
-import be.willekens.multi.module.template.domain.models.parking_lot.Price;
-import be.willekens.multi.module.template.domain.repository.ParkingLotRepository;
 import be.willekens.multi.module.template.infrastructure.exceptions.InvalidCategoryException;
-import be.willekens.multi.module.template.infrastructure.exceptions.InvalidEmailException;
-import be.willekens.multi.module.template.service.ParkingLotService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,7 +11,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.jupiter.api.Assertions.*;
 

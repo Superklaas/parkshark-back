@@ -1,7 +1,7 @@
 package be.willekens.multi.module.template.domain.models.parking_lot;
 
+import be.willekens.multi.module.template.domain.models.address.Address;
 import be.willekens.multi.module.template.infrastructure.exceptions.InvalidPhoneNumberException;
-import be.willekens.multi.module.template.infrastructure.utils.EmailUtils;
 
 import javax.persistence.*;
 

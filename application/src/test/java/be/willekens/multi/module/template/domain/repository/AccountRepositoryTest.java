@@ -1,7 +1,7 @@
 package be.willekens.multi.module.template.domain.repository;
 
-import be.willekens.multi.module.template.domain.models.users.Account;
-import be.willekens.multi.module.template.domain.models.users.Role;
+import be.willekens.multi.module.template.domain.models.account.Account;
+import be.willekens.multi.module.template.domain.models.account.Role;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

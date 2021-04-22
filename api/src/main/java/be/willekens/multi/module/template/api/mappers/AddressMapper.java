@@ -2,8 +2,8 @@ package be.willekens.multi.module.template.api.mappers;
 
 import be.willekens.multi.module.template.api.dtos.CreateAddressDto;
 import be.willekens.multi.module.template.api.dtos.ReceiveAddressDto;
-import be.willekens.multi.module.template.domain.models.parking_lot.Address;
-import be.willekens.multi.module.template.domain.models.parking_lot.PostalCode;
+import be.willekens.multi.module.template.domain.models.address.Address;
+import be.willekens.multi.module.template.domain.models.address.PostalCode;
 import be.willekens.multi.module.template.service.PostalCodeService;
 import org.springframework.stereotype.Component;
 
