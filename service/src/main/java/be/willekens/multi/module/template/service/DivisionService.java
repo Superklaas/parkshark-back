@@ -25,4 +25,8 @@ public class DivisionService {
         return divisionRepository.findAll();
     }
 
+    public Division getDivisionById(Integer id){
+        return divisionRepository.findById(id).orElse(null);
+    }
+
 }

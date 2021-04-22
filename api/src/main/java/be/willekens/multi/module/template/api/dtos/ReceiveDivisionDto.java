@@ -11,6 +11,7 @@ public class ReceiveDivisionDto {
     private String name;
     private String originalName;
     private String director;
+    private Integer parentId;
 
     public ReceiveDivisionDto setId(int id) {
         this.id = id;
@@ -29,6 +30,11 @@ public class ReceiveDivisionDto {
 
     public ReceiveDivisionDto setDirector(String director) {
         this.director = director;
+        return this;
+    }
+
+    public ReceiveDivisionDto setParentId(Integer parentId) {
+        this.parentId = parentId;
         return this;
     }
 }

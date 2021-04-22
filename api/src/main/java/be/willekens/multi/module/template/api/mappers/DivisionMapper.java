@@ -3,16 +3,26 @@ package be.willekens.multi.module.template.api.mappers;
 import be.willekens.multi.module.template.api.dtos.CreateDivisionDto;
 import be.willekens.multi.module.template.api.dtos.ReceiveDivisionDto;
 import be.willekens.multi.module.template.domain.models.division.Division;
+import be.willekens.multi.module.template.service.DivisionService;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@NoArgsConstructor
 public class DivisionMapper {
+
+    @Autowired
+    private DivisionService divisionService;
 
     public Division createDivisionDto_to_Division(CreateDivisionDto createDivisionDto) {
         return new Division(
                 createDivisionDto.getName(),
                 createDivisionDto.getOriginalName(),
-                createDivisionDto.getDirector());
+                createDivisionDto.getDirector())
+                .setParentDivision(createDivisionDto.getParentId() == null ? null :
+                        divisionService.getDivisionById(createDivisionDto.getParentId()));
+
     }
 
     public ReceiveDivisionDto division_to_receiveDivisionDto(Division division) {
@@ -20,7 +30,9 @@ public class DivisionMapper {
                 .setId(division.getId())
                 .setName(division.getName())
                 .setOriginalName(division.getOriginalName())
-                .setDirector(division.getDirector());
+                .setDirector(division.getDirector())
+                .setParentId(division.getParentDivision() == null ? null :
+                        division.getParentDivision().getId());
     }
 
 

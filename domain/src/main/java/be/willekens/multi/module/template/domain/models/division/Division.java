@@ -1,5 +1,6 @@
 package be.willekens.multi.module.template.domain.models.division;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -26,10 +27,18 @@ public class Division {
     @Column(name = "director")
     private String director;
 
+    @ManyToOne
+    @JoinColumn(name = "parent_division_id", nullable = true)
+    private Division parentDivision;
+
     public Division(String name, String originalName, String director) {
         this.name = name;
         this.originalName = originalName;
         this.director = director;
     }
 
+    public Division setParentDivision(Division parentDivision) {
+        this.parentDivision = parentDivision;
+        return this;
+    }
 }
