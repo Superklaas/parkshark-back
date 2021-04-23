@@ -70,4 +70,6 @@ public class ParkingLotControllerEndToEnd {
 
         assertThat(receivedParkingLot.getName()).isEqualTo(createParkingLotDto.getName());
     }
+
+
 }

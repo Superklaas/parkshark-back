@@ -46,8 +46,7 @@ public class DivisionController {
     @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<ReceiveDivisionDto> getall(){
-        return divisionService.getAllDivisions().stream().map(division ->
-        divisionMapper.division_to_receiveDivisionDto(division)).collect(Collectors.toList());
+        return divisionService.getAllDivisions().stream().map(divisionMapper::division_to_receiveDivisionDto).collect(Collectors.toList());
     }
 
 
