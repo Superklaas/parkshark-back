@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @RestController
 @RequestMapping(path = DivisionController.DIVISION_RESOURCE_PATH)
 public class DivisionController {
@@ -48,6 +47,5 @@ public class DivisionController {
     public List<ReceiveDivisionDto> getall(){
         return divisionService.getAllDivisions().stream().map(divisionMapper::division_to_receiveDivisionDto).collect(Collectors.toList());
     }
-
 
 }

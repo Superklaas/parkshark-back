@@ -32,7 +32,6 @@ public class MemberService {
         } catch (DataIntegrityViolationException e) {
             throw new InvalidEmailException("this email address already exists");
         }
-
     }
 
     public PostalCode getPostalCodeByPostalCodeOrCreateNewOne(PostalCode postalCode) {
