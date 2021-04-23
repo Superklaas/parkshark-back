@@ -11,8 +11,15 @@ public class CreateDivisionDto {
     private String name;
     private String originalName;
     private String director;
-    @JsonProperty(required = false)
     private Integer parentId;
+
+
+    public CreateDivisionDto(String name, String originalName, String director, Integer parentId) {
+        this.name = name;
+        this.originalName = originalName;
+        this.director = director;
+        this.parentId = parentId;
+    }
 
     public CreateDivisionDto setName(String name) {
         this.name = name;
