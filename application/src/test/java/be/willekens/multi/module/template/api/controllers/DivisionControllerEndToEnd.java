@@ -1,9 +1,7 @@
 package be.willekens.multi.module.template.api.controllers;
 
-import be.willekens.multi.module.template.api.dtos.CreateAddressDto;
-import be.willekens.multi.module.template.api.dtos.CreateContactPersonDto;
-import be.willekens.multi.module.template.api.dtos.CreateParkingLotDto;
-import be.willekens.multi.module.template.api.dtos.ReceiveParkingLotDto;
+import be.willekens.multi.module.template.api.dtos.CreateDivisionDto;
+import be.willekens.multi.module.template.api.dtos.ReceiveDivisionDto;
 import be.willekens.multi.module.template.domain.models.account.Account;
 import be.willekens.multi.module.template.domain.models.account.Role;
 import be.willekens.multi.module.template.domain.repository.AccountRepository;
@@ -17,14 +15,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ActiveProfiles("EtoE")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @EnableAutoConfiguration
-public class ParkingLotControllerEndToEnd {
+public class DivisionControllerEndToEnd {
 
     @LocalServerPort
     private int port;
@@ -32,19 +30,15 @@ public class ParkingLotControllerEndToEnd {
     private final AccountRepository accountRepository;
 
     @Autowired
-    public ParkingLotControllerEndToEnd(AccountRepository accountRepository) {
+    public DivisionControllerEndToEnd(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
     @Test
-    void testingParkingLotControllerCreateParkingLot_restAssured() {
+    void testingParkingLotControllerCreateDivision_restAssured(){
         accountRepository.save(new Account("rafael@parkshark.be","admin", Role.MANAGER));
-
-        CreateAddressDto createAddressDto = new CreateAddressDto("Sussame Street","32","3300","Tienen");
-        CreateAddressDto createAddressDto2 = new CreateAddressDto("Baker Street","39","3800","Sint-Truiden");
-        CreateContactPersonDto createContactPersonDto = new CreateContactPersonDto("Ihsan","04555555","","rafael@excalibur",createAddressDto);
-        CreateParkingLotDto createParkingLotDto = new CreateParkingLotDto("Andre","ABOVE_GROUND_BUILDING",10,createContactPersonDto,createAddressDto2,3);
-
+        CreateDivisionDto createDivisionDto = new CreateDivisionDto("Qpark", "Q-park inc", "Director John",
+                null);
         var token = given()
                 .baseUri("http://localhost")
                 .port(port)
@@ -55,24 +49,24 @@ public class ParkingLotControllerEndToEnd {
                 .extract()
                 .response().headers().get("Authorization");
 
-        ReceiveParkingLotDto receivedParkingLot = given()
+        ReceiveDivisionDto receivedDivisionDto = given()
                 .baseUri("http://localhost")
                 .port(port)
                 .header("Authorization", token.getValue())
                 .contentType(ContentType.JSON)
-                .body(createParkingLotDto)
-                .when().post("/parking-lots")
+                .body(createDivisionDto)
+                .when().post("/divisions")
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.CREATED.value())
                 .extract()
-                .as(ReceiveParkingLotDto.class);
+                .as(ReceiveDivisionDto.class);
 
-        assertThat(receivedParkingLot.getName()).isEqualTo(createParkingLotDto.getName());
+        assertThat(receivedDivisionDto.getName()).isEqualTo(createDivisionDto.getName());
     }
 
     @Test
-    void estingParkingLotControllerGetAllParkingLots_restAssured() {
+    void testingDivisionControllerGetAllDivisions_restAssured(){
         accountRepository.save(new Account("rafael@parkshark.be","admin", Role.MANAGER));
 
         var token = given()
@@ -85,17 +79,20 @@ public class ParkingLotControllerEndToEnd {
                 .extract()
                 .response().headers().get("Authorization");
 
-        ReceiveParkingLotDto[] receivedParkingLot = given()
+        ReceiveDivisionDto[] receivedParkingLot = given()
                 .baseUri("http://localhost")
                 .port(port)
                 .header("Authorization", token.getValue())
                 .contentType(ContentType.JSON)
-//                .body(ReceiveParkingLotDto)
-                .when().post("/parking-lots")
+                .body(ReceiveDivisionDto[].class)
+                .when().get("/divisions")
                 .then()
                 .assertThat()
-                .statusCode(HttpStatus.CREATED.value())
+                .statusCode(HttpStatus.OK.value())
                 .extract()
-                .as(ReceiveParkingLotDto[].class);
+                .as(ReceiveDivisionDto[].class);
     }
+
+
+
 }

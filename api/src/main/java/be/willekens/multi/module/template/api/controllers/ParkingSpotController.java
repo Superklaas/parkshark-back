@@ -1,6 +1,5 @@
 package be.willekens.multi.module.template.api.controllers;
 
-
 import be.willekens.multi.module.template.api.dtos.CreateParkingSpotDto;
 import be.willekens.multi.module.template.api.dtos.ReceiveParkingSpotDto;
 import be.willekens.multi.module.template.api.mappers.ParkingSpotMapper;
@@ -36,9 +35,5 @@ public class ParkingSpotController {
         ParkingSpot parkingSpot = parkingSpotService.createParkingSpot(parkingSpotMapper.createParkingSpotDto_to_parkingSpot(createParkingSpotDto));
         return parkingSpotMapper.parkingSpot_to_ReceiveParkingSpotDto(parkingSpot);
     }
-
-
-
-
 
 }

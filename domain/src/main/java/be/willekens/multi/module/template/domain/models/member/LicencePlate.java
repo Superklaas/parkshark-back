@@ -25,7 +25,6 @@ public class LicencePlate {
         this.issuingCountry = issuingCountry;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,4 +37,5 @@ public class LicencePlate {
     public int hashCode() {
         return Objects.hash(plateNumber, issuingCountry);
     }
+
 }

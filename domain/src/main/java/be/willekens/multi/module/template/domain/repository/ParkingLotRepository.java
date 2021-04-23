@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ParkingLotRepository extends JpaRepository<ParkingLot,Integer> {
 
-
 }

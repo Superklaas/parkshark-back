@@ -113,7 +113,10 @@ public class ParkingLot {
         return this;
     }
 
-    public void reduce_available_spots_left() {
+    public void reduceAvailableSpotsLeft() {
+        if (this.availableSpotsLeft == 0) {
+            throw new NoParkingSpotLeftException("There is no parking spot available");
+        }
         this.availableSpotsLeft -= 1;
     }
 

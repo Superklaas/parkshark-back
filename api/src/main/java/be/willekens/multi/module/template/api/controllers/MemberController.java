@@ -34,6 +34,4 @@ public class MemberController {
          return memberMapper.member_to_receiveMemberDto(member);
     }
 
-
-
 }

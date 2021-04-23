@@ -10,22 +10,19 @@ import java.time.LocalDate;
 @Entity
 @Table(name="parking_spots")
 public class ParkingSpot {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "parking_spot_id")
     private int id;
-
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member memberId;
-
     @ManyToOne
     @JoinColumn(name="parking_lot_id")
     private ParkingLot parkingLotId;
-
     @Embedded
     private LicencePlate licencePlate;
-
     @Column(name = "start_allocation_date",columnDefinition = "DATE")
     private LocalDate startAllocationDate;
 

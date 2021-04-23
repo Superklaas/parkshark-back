@@ -45,8 +45,4 @@ public class MemberMapper {
                 .setRegistrationDate(member.getRegistrationDate());
     }
 
-
-
-
-
 }

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @RestController
 @RequestMapping(path = DivisionController.DIVISION_RESOURCE_PATH)
 public class DivisionController {
@@ -46,9 +45,7 @@ public class DivisionController {
     @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<ReceiveDivisionDto> getall(){
-        return divisionService.getAllDivisions().stream().map(division ->
-        divisionMapper.division_to_receiveDivisionDto(division)).collect(Collectors.toList());
+        return divisionService.getAllDivisions().stream().map(divisionMapper::division_to_receiveDivisionDto).collect(Collectors.toList());
     }
-
 
 }

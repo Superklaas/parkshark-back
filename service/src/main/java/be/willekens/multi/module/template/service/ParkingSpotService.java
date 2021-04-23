@@ -29,10 +29,7 @@ public class ParkingSpotService {
         }
 
         ParkingLot parkingLot = parkingLotService.findById(parkingSpot.getParkingLotId().getId());
-        if (parkingLot.getAvailableSpotsLeft() == 0) {
-            throw new NoParkingSpotLeftException("There is no parking spot available");
-        }
-        parkingLot.reduce_available_spots_left();
+        parkingLot.reduceAvailableSpotsLeft();
         return parkingSpotRepository.save(parkingSpot);
     }
 

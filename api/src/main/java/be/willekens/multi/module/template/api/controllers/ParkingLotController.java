@@ -48,6 +48,4 @@ public class ParkingLotController {
         return parkingLotMapper.parkingLot_to_receiveAllParkingLotsDto(parkingLots);
     }
 
-
-
 }

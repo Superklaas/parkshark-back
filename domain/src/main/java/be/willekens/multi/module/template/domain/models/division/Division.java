@@ -1,10 +1,7 @@
 package be.willekens.multi.module.template.domain.models.division;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-
 import javax.persistence.*;
 
 @Entity
@@ -17,16 +14,12 @@ public class Division {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "division_id")
     private int id;
-
     @Column(name = "name")
     private String name;
-
     @Column(name = "original_name")
     private String originalName;
-
     @Column(name = "director")
     private String director;
-
     @ManyToOne
     @JoinColumn(name = "parent_division_id", nullable = true)
     private Division parentDivision;
