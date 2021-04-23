@@ -36,6 +36,10 @@ public class Member {
     @JoinColumn(name = "account_id")
     private Account account;
 
+    public Account getAccount() {
+        return account;
+    }
+
     public Member setAccount(Account account) {
         this.account = account;
         return this;

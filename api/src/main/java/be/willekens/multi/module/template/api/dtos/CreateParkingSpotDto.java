@@ -14,4 +14,10 @@ public class CreateParkingSpotDto {
     private String licencePlateNumber;
     private String licencePlateCountry;
 
+    public CreateParkingSpotDto(int memberId, int parkingLotId, String licencePlateNumber, String licencePlateCountry) {
+        this.memberId = memberId;
+        this.parkingLotId = parkingLotId;
+        this.licencePlateNumber = licencePlateNumber;
+        this.licencePlateCountry = licencePlateCountry;
+    }
 }
