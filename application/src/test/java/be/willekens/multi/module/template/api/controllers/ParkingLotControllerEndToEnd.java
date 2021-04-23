@@ -70,4 +70,32 @@ public class ParkingLotControllerEndToEnd {
 
         assertThat(receivedParkingLot.getName()).isEqualTo(createParkingLotDto.getName());
     }
+
+    @Test
+    void estingParkingLotControllerGetAllParkingLots_restAssured() {
+        accountRepository.save(new Account("rafael@parkshark.be","admin", Role.MANAGER));
+
+        var token = given()
+                .baseUri("http://localhost")
+                .port(port)
+                .when().post("/authenticate?username=rafael@parkshark.be&password=admin")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK.value())
+                .extract()
+                .response().headers().get("Authorization");
+
+        ReceiveParkingLotDto[] receivedParkingLot = given()
+                .baseUri("http://localhost")
+                .port(port)
+                .header("Authorization", token.getValue())
+                .contentType(ContentType.JSON)
+//                .body(ReceiveParkingLotDto)
+                .when().post("/parking-lots")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.CREATED.value())
+                .extract()
+                .as(ReceiveParkingLotDto[].class);
+    }
 }

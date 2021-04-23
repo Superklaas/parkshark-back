@@ -76,5 +76,4 @@ public class ParkingLotMapper {
         return contactPerson.getTelephoneNumber();
     }
 
-
 }

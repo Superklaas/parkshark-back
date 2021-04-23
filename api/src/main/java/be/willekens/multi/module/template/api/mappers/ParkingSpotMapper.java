@@ -13,8 +13,9 @@ import java.time.LocalDate;
 
 @Component
 public class ParkingSpotMapper {
-    private ParkingLotService parkingLotService;
-    private MemberService memberService;
+
+    private final ParkingLotService parkingLotService;
+    private final MemberService memberService;
 
     @Autowired
     public ParkingSpotMapper(ParkingLotService parkingLotService, MemberService memberService) {
@@ -30,7 +31,6 @@ public class ParkingSpotMapper {
                 .setStartAllocationDate(LocalDate.now());
     }
 
-
     public ReceiveParkingSpotDto parkingSpot_to_ReceiveParkingSpotDto(ParkingSpot parkingSpot) {
         return new ReceiveParkingSpotDto()
                 .setId(parkingSpot.getId())
@@ -39,6 +39,5 @@ public class ParkingSpotMapper {
                 .setLicencePlateNumber(parkingSpot.getLicencePlate().getPlateNumber())
                 .setLicencePlateCountry(parkingSpot.getLicencePlate().getIssuingCountry());
     }
-
 
 }

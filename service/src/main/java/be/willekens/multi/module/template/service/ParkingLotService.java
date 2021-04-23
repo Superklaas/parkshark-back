@@ -13,7 +13,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 @Transactional
 @NoArgsConstructor
@@ -32,17 +31,12 @@ public class ParkingLotService {
        return parkingLotRepository.save(parkingLot);
     }
 
-
     public PostalCode getPostalCodeByPostalCodeOrCreateNewOne(PostalCode postalCode) {
         PostalCode resultPostalCode = postalCodeService.getByPostalCode(postalCode.getPostalCode());
         if (resultPostalCode == null) {
             resultPostalCode = postalCodeService.createPostalCode(postalCode);
         }
         return resultPostalCode;
-    }
-    public void checkIfIsThereParkingSpotAvailable(ParkingLot parkingLotId) {
-      Optional<ParkingLot> parkingLot =  parkingLotRepository.findById(parkingLotId.getId());
-      parkingLot.get().reduce_available_spots_left();
     }
 
     public ParkingLot findById(int id) {
