@@ -23,11 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.parkSharkAuthenticationProvider = parkSharkAuthenticationProvider;
     }
 
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/webjars/swagger-ui/**");
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and()
