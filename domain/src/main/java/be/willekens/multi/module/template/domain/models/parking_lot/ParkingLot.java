@@ -4,6 +4,8 @@ import be.willekens.multi.module.template.domain.models.address.Address;
 import be.willekens.multi.module.template.domain.models.price.Price;
 
 import be.willekens.multi.module.template.infrastructure.exceptions.NoParkingSpotLeftException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -11,6 +13,8 @@ import java.util.Objects;
 @Entity
 @Table(name="parking_lot")
 public class ParkingLot {
+
+    private static final Logger logger = LoggerFactory.getLogger(ParkingLot.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -115,6 +119,7 @@ public class ParkingLot {
 
     public void reduceAvailableSpotsLeft() {
         if (this.availableSpotsLeft == 0) {
+            logger.warn("A member tried to ");
             throw new NoParkingSpotLeftException("There is no parking spot available");
         }
         this.availableSpotsLeft -= 1;

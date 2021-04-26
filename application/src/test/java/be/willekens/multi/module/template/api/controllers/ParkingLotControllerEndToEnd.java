@@ -29,12 +29,8 @@ public class ParkingLotControllerEndToEnd {
     @LocalServerPort
     private int port;
 
-    private final AccountRepository accountRepository;
-
     @Autowired
-    public ParkingLotControllerEndToEnd(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
+    private AccountRepository accountRepository;
 
     @Test
     void testingParkingLotControllerCreateParkingLot_restAssured() {
@@ -72,7 +68,7 @@ public class ParkingLotControllerEndToEnd {
     }
 
     @Test
-    void estingParkingLotControllerGetAllParkingLots_restAssured() {
+    void testingParkingLotControllerGetAllParkingLots_restAssured() {
         accountRepository.save(new Account("rafael@parkshark.be","admin", Role.MANAGER));
 
         var token = given()
@@ -89,12 +85,10 @@ public class ParkingLotControllerEndToEnd {
                 .baseUri("http://localhost")
                 .port(port)
                 .header("Authorization", token.getValue())
-                .contentType(ContentType.JSON)
-//                .body(ReceiveParkingLotDto)
-                .when().post("/parking-lots")
+                .when().get("/parking-lots")
                 .then()
                 .assertThat()
-                .statusCode(HttpStatus.CREATED.value())
+                .statusCode(HttpStatus.OK.value())
                 .extract()
                 .as(ReceiveParkingLotDto[].class);
     }

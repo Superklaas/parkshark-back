@@ -7,7 +7,13 @@ import be.willekens.multi.module.template.domain.models.address.Address;
 import be.willekens.multi.module.template.domain.models.address.PostalCode;
 import be.willekens.multi.module.template.domain.models.member.LicencePlate;
 import be.willekens.multi.module.template.domain.models.member.Member;
-import be.willekens.multi.module.template.domain.repository.AccountRepository;
+import be.willekens.multi.module.template.domain.models.parking_lot.Category;
+import be.willekens.multi.module.template.domain.models.parking_lot.ContactPerson;
+import be.willekens.multi.module.template.domain.models.parking_lot.ParkingLot;
+import be.willekens.multi.module.template.domain.models.price.Price;
+import be.willekens.multi.module.template.service.AccountService;
+import be.willekens.multi.module.template.service.MemberService;
+import be.willekens.multi.module.template.service.ParkingLotService;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,58 +38,55 @@ public class ParkingSpotControllerEndToEnd {
     @LocalServerPort
     private int port;
 
-
-    private final AccountRepository accountRepository;
-
     @Autowired
-    public ParkingSpotControllerEndToEnd(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
+    private AccountService accountService;
+    @Autowired
+    private ParkingLotService parkingLotService;
+    @Autowired
+    private MemberService memberService;
 
     @Test
     void testingParkingSpotControllerAllocateParkingSpot_restAssured() {
-//        Member member =  memberFactory();
-//        Account accountToAdd = member.getAccount();
-//        accountRepository.save(accountToAdd);
+        Member member =  memberFactory();
+        memberService.createMember(member);
 
-//        CreateAddressDto createAddressDto = new CreateAddressDto("Sussame Street","32","3300","Tienen");
-//        CreateContactPersonDto createContactPersonDto = new CreateContactPersonDto("Ihsan","04555555","","rafael@excalibur",createAddressDto);
-//        CreateParkingLotDto createParkingLotDto = new CreateParkingLotDto("Andre","ABOVE_GROUND_BUILDING",10,createContactPersonDto,createAddressDto,3);
-//
-//        CreateParkingSpotDto createParkingSpotDto = new CreateParkingSpotDto();
-//             createParkingSpotDto.setMemberId(member.getId());
-//             createParkingSpotDto.setLicencePlateCountry(member.getLicencePlate().getIssuingCountry());
-//             createParkingSpotDto.setLicencePlateNumber(member.getLicencePlate().getPlateNumber());
-//             createParkingSpotDto.setParkingLotId(createParkingSpotDto.getParkingLotId());
-//
-//        var token = given()
-//                .baseUri("http://localhost")
-//                .port(port)
-//                .when().post("/authenticate?username=test@test.test&password=testtest")
-//                .then()
-//                .assertThat()
-//                .statusCode(HttpStatus.OK.value())
-//                .extract()
-//                .response().headers().get("Authorization");
-//
-//        ReceiveParkingSpotDto receivedParkingSpot = given()
-//                .baseUri("http://localhost")
-//                .port(port)
-//                .header("Authorization", token.getValue())
-//                .contentType(ContentType.JSON)
-//                .body(createParkingSpotDto)
-//                .when().post("/parking-spots")
-//                .then()
-//                .assertThat()
-//                .statusCode(HttpStatus.CREATED.value())
-//                .extract()
-//                .as(ReceiveParkingSpotDto.class);
-//
-//        assertThat(receivedParkingSpot.getMemberId()).isEqualTo(createParkingSpotDto.getMemberId());
+        Account accountToAdd = member.getAccount();
+        accountService.createAccount(accountToAdd);
 
+        ParkingLot parkingLot = parkingLotFactory();
+        parkingLotService.createParkingLot(parkingLot);
+
+        CreateParkingSpotDto createParkingSpotDto = new CreateParkingSpotDto();
+             createParkingSpotDto.setMemberId(member.getId());
+             createParkingSpotDto.setLicencePlateCountry(member.getLicencePlate().getIssuingCountry());
+             createParkingSpotDto.setLicencePlateNumber(member.getLicencePlate().getPlateNumber());
+             createParkingSpotDto.setParkingLotId(parkingLot.getId());
+
+        var token = given()
+                .baseUri("http://localhost")
+                .port(port)
+                .when().post("/authenticate?username=test@test.test&password=testtest")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.OK.value())
+                .extract()
+                .response().headers().get("Authorization");
+
+        ReceiveParkingSpotDto receivedParkingSpot = given()
+                .baseUri("http://localhost")
+                .port(port)
+                .header("Authorization", token.getValue())
+                .contentType(ContentType.JSON)
+                .body(createParkingSpotDto)
+                .when().post("/parking-spots")
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.CREATED.value())
+                .extract()
+                .as(ReceiveParkingSpotDto.class);
+
+        assertThat(receivedParkingSpot.getMemberId()).isEqualTo(createParkingSpotDto.getMemberId());
     }
-
-
 
     private Member memberFactory() {
         return new Member()
@@ -96,12 +99,19 @@ public class ParkingSpotControllerEndToEnd {
                 .setAddress(new Address()
                         .setStreetName("testystreet")
                         .setStreetNumber("test")
-                        .setPostalCode(new PostalCode().setLabel("a").setPostalCode("1000"))
-                )
-               ;
+                        .setPostalCode(new PostalCode().setLabel("a").setPostalCode("1000")));
     }
 
-
-
+    private ParkingLot parkingLotFactory() {
+        return new ParkingLot()
+                .setName("Andre")
+                .setCategory(Category.ABOVE_GROUND_BUILDING)
+                .setMaxCapacity(10)
+                .setAvailableSpotsLeft(10)
+                .setAddress(new Address("Sussame Street", "32", new PostalCode("3300", "Tienen")))
+                .setContactPerson(new ContactPerson("Ihsan", "04555555", "", "rafael@excalibur.com",
+                        new Address("Baker Street","19",new PostalCode("3000","Aarschot"))))
+                .setPricePerHour(Price.createPriceInEuros(3));
+    }
 
 }

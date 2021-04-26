@@ -27,12 +27,8 @@ public class DivisionControllerEndToEnd {
     @LocalServerPort
     private int port;
 
-    private final AccountRepository accountRepository;
-
     @Autowired
-    public DivisionControllerEndToEnd(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
+    private AccountRepository accountRepository;
 
     @Test
     void testingParkingLotControllerCreateDivision_restAssured(){

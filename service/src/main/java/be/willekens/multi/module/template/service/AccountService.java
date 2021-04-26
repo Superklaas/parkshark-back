@@ -19,4 +19,8 @@ public class AccountService {
     public Account findAccountByEmailAndPassword(String email, String password) {
         return accountRepository.findAccountByEmailAndEncryptedPassword(email, password);
     }
+
+    public Account createAccount(Account account) {
+        return accountRepository.save(account);
+    }
 }
