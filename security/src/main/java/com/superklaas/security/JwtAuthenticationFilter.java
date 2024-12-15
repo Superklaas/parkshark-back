@@ -19,7 +19,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-
         setFilterProcessesUrl(SecurityConstants.AUTH_LOGIN_URL);
     }
 
@@ -27,7 +26,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
         var email = request.getParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY);
         var password = request.getParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY);
-
         return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
     }
 
@@ -38,11 +36,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .setHeaderParam("typ", SecurityConstants.TOKEN_TYPE)
                 .setIssuer(SecurityConstants.TOKEN_ISSUER)
                 .setAudience(SecurityConstants.TOKEN_AUDIENCE)
-                .setSubject(authentication.getName())
-                .setExpiration(new Date(new Date().getTime() + 3600000)) // 1 hour
-                .claim("rol", authentication.getAuthorities())
+                .setSubject(authentication.getName()) // username
+                .setExpiration(new Date(new Date().getTime() + 3600000)) // expiration time token = 1 hour
+                .claim("rol", authentication.getAuthorities()) // authorities for user
                 .compact();
-
         response.addHeader(SecurityConstants.TOKEN_HEADER, SecurityConstants.TOKEN_PREFIX + token);
     }
 }

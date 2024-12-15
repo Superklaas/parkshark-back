@@ -30,8 +30,9 @@ public class ParkSharkAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        Account user = accountService.findAccountByEmailAndPassword(authentication.getPrincipal().toString(), authentication.getCredentials().toString());
-        if(user != null){
+        Account user = accountService.findAccountByEmailAndPassword(authentication.getPrincipal().toString(),
+                                                                    authentication.getCredentials().toString());
+        if (user != null) {
             return new UsernamePasswordAuthenticationToken(
                     user.getEmail(),
                     user.getEncryptedPassword(),

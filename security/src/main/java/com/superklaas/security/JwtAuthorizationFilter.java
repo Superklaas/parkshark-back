@@ -35,41 +35,33 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         var authentication = getAuthentication(request);
-
         if (authentication == null) {
             filterChain.doFilter(request, response);
             return;
         }
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
+        // get JWT token from request header
         var token = request.getHeader(SecurityConstants.TOKEN_HEADER);
-
         if (!isEmpty(token) && token.startsWith(SecurityConstants.TOKEN_PREFIX)) {
             try {
-                var signingKey = SecurityConstants.JWT_SECRET.getBytes();
-
+                // decode token with signing key
                 var parsedToken = Jwts.parser()
-                        .setSigningKey(signingKey)
-                        .parseClaimsJws(token.replace("Bearer ",""));
-
-                var email = parsedToken
-                        .getBody()
-                        .getSubject();
-
-                ArrayList<LinkedHashMap<String, String>> authoritiesInToken
-                        = parsedToken.getBody().get("rol", ArrayList.class);
-
+                        .setSigningKey(SecurityConstants.JWT_SECRET.getBytes())
+                        .parseClaimsJws(token.replace("Bearer ", ""));
+                // get username and list authorities from decoded token
+                var email = parsedToken.getBody().getSubject();
+                ArrayList<LinkedHashMap<String, String>> authoritiesInToken = parsedToken.getBody().get("rol", ArrayList.class);
                 var authorities = authoritiesInToken.stream()
                         .map(linkedMap -> linkedMap.get("authority"))
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
-
+                // if valid, return authentication object with username & list authorities
                 if (!isEmpty(email)) {
-                    return new UsernamePasswordAuthenticationToken(email,null, authorities);
+                    return new UsernamePasswordAuthenticationToken(email, null, authorities);
                 }
             } catch (ExpiredJwtException exception) {
                 log.warn("Request to parse expired JWT : {} failed : {}", token, exception.getMessage());
@@ -83,7 +75,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                 log.warn("Request to parse empty or null JWT : {} failed : {}", token, exception.getMessage());
             }
         }
-
-        return null;
+        return null; // if JWT decoding did not work
     }
 }

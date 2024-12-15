@@ -4,9 +4,12 @@ import org.assertj.core.util.Lists;
 
 import java.util.List;
 
+import static com.superklaas.domain.models.account.Feature.*;
+
 public enum Role {
-    MANAGER(Feature.CREATE_PARKING_LOT, Feature.CREATE_DIVISION, Feature.VIEW_ALL_DIVISIONS, Feature.GET_ALL_PARKING_LOTS),
-    MEMBER(Feature.ALLOCATE_PARKING_SPOT);
+
+    MANAGER(CREATE_PARKING_LOT, CREATE_DIVISION, VIEW_ALL_DIVISIONS, GET_ALL_PARKING_LOTS),
+    MEMBER(ALLOCATE_PARKING_SPOT);
 
     private final List<Feature> featureList;
 
@@ -17,4 +20,5 @@ public enum Role {
     public List<Feature> getFeatureList() {
         return featureList;
     }
+
 }

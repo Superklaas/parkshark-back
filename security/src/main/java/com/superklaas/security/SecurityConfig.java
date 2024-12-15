@@ -24,16 +24,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and()
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/members","/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/webjars/swagger-ui/**")
+        http.cors();
+        http.csrf().disable();
+        http.headers().frameOptions().disable(); // enables rendering h2-console
+        http.authorizeRequests()
+                .antMatchers("/members", "/h2-console/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/webjars/swagger-ui/**")
                 .permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager()))
-                .addFilter(new JwtAuthorizationFilter(authenticationManager()))
-                .sessionManagement().sessionCreationPolicy(STATELESS);
+                .anyRequest()
+                .authenticated();
+        http.addFilter(new JwtAuthenticationFilter(authenticationManager()));
+        http.addFilter(new JwtAuthorizationFilter(authenticationManager()));
+        http.sessionManagement().sessionCreationPolicy(STATELESS);
     }
 
     @Autowired
