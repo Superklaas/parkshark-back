@@ -19,31 +19,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>api</artifactId>
         </dependency>
-
-<!--        <dependency>-->
-<!--&lt;!&ndash;            <groupId>io.springfox</groupId>&ndash;&gt;-->
-<!--&lt;!&ndash;            <artifactId>springfox-boot-starter</artifactId>&ndash;&gt;-->
-<!--&lt;!&ndash;            <version>3.0.0</version>&ndash;&gt;-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.5.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-security</artifactId>
-            <version>1.5.7</version>
+            <version>1.8.0</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
