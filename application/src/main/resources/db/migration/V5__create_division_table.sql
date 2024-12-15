@@ -7,4 +7,3 @@ create table divisions (
     director varchar(255)
 );
 
-alter table divisions owner to student;

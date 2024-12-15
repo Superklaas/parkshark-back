@@ -16,5 +16,3 @@ create table members(
                     constraint fk_members_to_accounts
                     references accounts
 );
-
-alter table members owner to student;

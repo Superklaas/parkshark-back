@@ -11,5 +11,3 @@ create table parking_spots
     issuing_country varchar(255),
     start_allocation_date date
 );
-alter table parking_spots
-    owner to student;
