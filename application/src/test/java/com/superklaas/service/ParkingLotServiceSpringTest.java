@@ -2,18 +2,15 @@ package com.superklaas.service;
 
 import com.superklaas.domain.models.address.Address;
 import com.superklaas.domain.models.address.PostalCode;
-import com.superklaas.domain.models.parking_lot.*;
-import com.superklaas.domain.models.price.Price;
 import com.superklaas.domain.models.parking_lot.Category;
 import com.superklaas.domain.models.parking_lot.ContactPerson;
 import com.superklaas.domain.models.parking_lot.ParkingLot;
+import com.superklaas.domain.models.price.Price;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@Disabled
 @SpringBootTest
 class ParkingLotServiceSpringTest {
 

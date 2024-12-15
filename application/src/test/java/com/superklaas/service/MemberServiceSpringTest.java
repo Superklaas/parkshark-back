@@ -1,12 +1,11 @@
 package com.superklaas.service;
 
-import com.superklaas.domain.models.member.LicencePlate;
+import com.superklaas.domain.models.account.Account;
+import com.superklaas.domain.models.account.Role;
 import com.superklaas.domain.models.address.Address;
 import com.superklaas.domain.models.address.PostalCode;
-import com.superklaas.domain.models.account.Account;
+import com.superklaas.domain.models.member.LicencePlate;
 import com.superklaas.domain.models.member.Member;
-import com.superklaas.domain.models.account.Role;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,14 +17,12 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@Disabled
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class MemberServiceSpringTest {
 
     @Autowired
     private MemberService memberService;
-
 
     @Test
     void createMember_whenPostalCodeAlreadyExists() {
